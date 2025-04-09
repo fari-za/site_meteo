@@ -1,0 +1,432 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: white;
+  color: #333;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+
+header h1 {
+  font-size: 2em;
+  margin-bottom: 8px;
+}
+
+
+nav ul {
+  list-style-type: none;
+  text-align: center;
+  margin-top: 10px;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1em;
+}
+
+nav ul li a:hover {
+  text-decoration: none;
+}
+
+
+main {
+  margin-top: 20px;
+  text-align: left;
+}
+
+
+section {
+  background: rgb(253, 254, 255);
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+section h2 {
+  font-size: 1.8em;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+section p {
+  font-size: 1.2em;
+}
+
+
+footer {
+  padding: 10px;
+  background-color: #e4ebeb;
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+footer span {
+  margin: 0 10px;
+  white-space: nowrap;
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+th {
+  background-color: #333;
+  color: white;
+  font-size: 1.2em;
+}
+
+td {
+  background-color: #f9f9f9;
+}
+
+
+#haut-de-page {
+  text-align: center;
+  display: block;
+  margin-top: 20px;
+}
+
+.main-nav{
+  background-color: #e4ebeb;
+}
+.main-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.main-nav li {
+  margin: 0 11px;
+}
+
+.main-nav a {
+  color: black;
+  text-decoration: none;
+  padding: 10px 15px;
+  display: block;
+  transition: background 0.3s;
+}
+
+.main-nav a:hover {
+  background-color: #d7dde1;
+  border-radius: 5px;
+  text-decoration: none !important;
+  
+}
+
+.side-nav {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  border-radius: 10px;
+  background-color: #393838;
+  padding: 10px;
+  width: 200px;
+}
+
+.side-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.side-nav a {
+  color: black;
+  text-decoration: none;
+  display: block;
+  padding: 5px;
+  transition: color 0.3s;
+}
+
+.centre{
+  margin-left: 90px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 50px;
+  right: 21px;
+  background-color: #323435;
+  color: rgb(251, 243, 243);
+  padding: 12px;
+  border-radius: 50%;
+  font-size: 50px;
+  text-decoration: none;
+  text-align: center;
+  width: 50px; 
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+  transition: background 0.3s, transform 0.2s;
+  line-height: 1; 
+}
+
+/* Effet au survol */
+.back-to-top:hover {
+  background-color: #030304; 
+  transform: scale(1.1);
+}
+
+input, select, textarea {
+  background-color: #fff;  /* Fond clair */
+  color: #000;             /* Texte noir */
+  border: 1px solid #ccc;  
+  padding: 8px 15px;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #777; 
+}
+
+/* Pour les boutons */
+button, input[type="submit"], input[type="button"] {
+  background-color: #ddd; 
+  color: #000;
+  border: 1px solid #bbb;
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+button:hover, input[type="submit"]:hover, input[type="button"]:hover {
+  background-color: #bbb;
+}
+
+.meteo-container {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  min-height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.meteo-actuelle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.temp {
+  font-size: 48px;
+  font-weight: bold;
+}
+
+.previsions-jours {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.jour {
+  background: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.table-meteo {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+.table-meteo th, .table-meteo td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.table-meteo th {
+  background: #f0f0f0;
+}
+table {
+  width: 90%;
+  max-width: 600px;
+  margin: auto;
+  border-collapse: collapse;
+  text-align: center;
+  box-shadow: 0px 4px 8px rgba(41, 39, 39, 0.1);
+}
+
+th, td {
+  padding: 12px;
+  border: 1px solid #474545;
+}
+
+th {
+  color: #ffffff;
+  background: #888181;
+}
+.info-meteo {
+  text-align: center;
+  background: #f4f4f4;
+  padding: 40px 20px;
+}
+
+.info-meteo h2 {
+  font-size: 26px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+article {
+  display: inline-block;
+  background: white;
+  padding: 15px;
+  margin: 10px;
+  max-width: 250px;
+  border-radius: 10px;
+  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+article:hover {
+  transform: scale(1.05);
+}
+
+
+h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+button {
+  background: #333;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #555;
+}
+
+.auto_location {
+  display: inline-block;
+  background-color: #2d88d8;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  margin: 10px 0;
+  border: none;
+  cursor: pointer;
+}
+
+.auto_location:hover {
+  background-color: #1565c0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.auto_location:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+
+.bar-container {
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 10px;
+}
+.label {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+.bar {
+  height: 24px;
+  background-color: #4caf50;
+  color: white;
+  text-align: right;
+  padding-right: 10px;
+  line-height: 24px;
+}
+
+#last_consultation {
+  display: inline-block;
+  margin: 15px 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  display: block;
+}
+
+.label {
+  font-weight: 500;
+  color: #444;
+
+}
+
+.ville-lien a {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #2a61c4;
+  text-decoration: none;
+}
+
+.ville-lien a:hover {
+  text-decoration: underline;
+}
+
+.date-consultation {
+  font-style: italic;
+  color: #777;
+}
+
