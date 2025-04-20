@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: #0e0b0b;
 }
 
 body {
@@ -10,7 +11,6 @@ body {
   background-color: white;
   color: #333;
   padding: 0;
-  margin: 0;
   text-align: center;
 }
 
@@ -22,7 +22,7 @@ header h1 {
 
 
 nav ul {
-  list-style-type: none;
+  list-style-type: none;  
   text-align: center;
   margin-top: 10px;
 }
@@ -58,6 +58,7 @@ section {
   max-width: 1300px;
   margin-left: auto;
   margin-right: auto;
+  color: rgb(9, 8, 8);
 }
 
 section h2 {
@@ -85,30 +86,28 @@ footer span {
   margin: 0 10px;
   white-space: nowrap;
 }
-
-
 table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
 }
 
-th,
-td {
-  padding: 12px;
-  text-align: left;
-  border: 1px solid #ddd;
-}
 
 th {
-  background-color: #333;
-  color: white;
+  background-color: #f4f4f4;
+  color: #090808;
   font-size: 1.2em;
+  padding: 12px;
+  text-align: left;
+  border: 1px solid hwb(0 3% 97%);
 }
 
 td {
-  background-color: #f9f9f9;
+  background-color: #fff;
+  color: hsl(0, 6%, 3%);
+  text-align: center;
 }
+
 
 
 #haut-de-page {
@@ -208,8 +207,8 @@ a {
 }
 
 input, select, textarea {
-  background-color: #fff;  /* Fond clair */
-  color: #000;             /* Texte noir */
+  background-color: #fff;
+  color: #000;
   border: 1px solid #ccc;  
   padding: 8px 15px;
 }
@@ -231,102 +230,49 @@ button:hover, input[type="submit"]:hover, input[type="button"]:hover {
   background-color: #bbb;
 }
 
-.meteo-container {
-  width: 80%;
-  margin: auto;
-  text-align: center;
-  min-height: 50vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.meteo-actuelle {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #f5f5f5;
-  padding: 20px;
-  border-radius: 10px;
-}
-
-.temp {
-  font-size: 48px;
-  font-weight: bold;
-}
-
-.previsions-jours {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
-}
-
-.jour {
-  background: #fff;
-  padding: 10px;
-  border-radius: 5px;
-  text-align: center;
-}
-
-.table-meteo {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-  border-radius: 10px;
-}
-
-.table-meteo th, .table-meteo td {
-  padding: 10px;
-  border: 1px solid #ddd;
-  text-align: center;
-}
-
-.table-meteo th {
-  background: #f0f0f0;
-}
-table {
-  width: 90%;
-  max-width: 600px;
-  margin: auto;
-  border-collapse: collapse;
-  text-align: center;
-  box-shadow: 0px 4px 8px rgba(41, 39, 39, 0.1);
-}
-
-th, td {
-  padding: 12px;
-  border: 1px solid #474545;
-}
-
-th {
-  color: #ffffff;
-  background: #888181;
-}
-.info-meteo {
-  text-align: center;
-  background: #f4f4f4;
-  padding: 40px 20px;
-}
-
-.info-meteo h2 {
-  font-size: 26px;
-  color: #333;
-  margin-bottom: 20px;
-}
 
 article {
-  display: inline-block;
+  display: block;
   background: white;
-  padding: 15px;
-  margin: 10px;
-  max-width: 250px;
+  padding: 20px;
+  margin: 30px auto;
+  max-width: 800px;
   border-radius: 10px;
-  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;  
 }
 
 article:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
+  
+}
+article table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+article td, article th {
+  padding: 12px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+article th {
+  background-color: #f4f4f4; 
+  color: #333; 
+}
+
+article td {
+  background-color: #fff; 
+  color: #333; 
+}
+
+article td img {
+  max-width: 100px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 
@@ -381,52 +327,173 @@ button:hover {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-
 .bar-container {
   width: 100%;
   max-width: 500px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  display: block;
+  padding-left: 10px;
 }
+
 .label {
-  font-weight: bold;
-  margin-bottom: 4px;
+  font-size: 14px;
+  white-space: nowrap;
+  font-weight: 500;
+  color: #333333;
+  display: block;
+  margin-bottom: 5px;
 }
+
 .bar {
   height: 24px;
   background-color: #4caf50;
   color: white;
-  text-align: right;
-  padding-right: 10px;
+  text-align: center;
   line-height: 24px;
-}
-
-#last_consultation {
-  display: inline-block;
-  margin: 15px 0;
-  font-size: 1rem;
-  line-height: 1.5;
+  border-radius: 5px;
+  font-size: 14px;
+  min-width: 50px;
   display: block;
+  margin-top: 5px;
 }
 
-.label {
-  font-weight: 500;
-  color: #444;
 
-}
+#last_consultation { 
+  display: inline-block; 
+  margin: 15px 0; 
+  font-size: 0.9em;
+  line-height: 1.5; 
+  color: white; 
+} 
 
-.ville-lien a {
+ 
+.ville-lien a { 
   font-weight: bold;
-  font-size: 1.1rem;
-  color: #2a61c4;
+  font-size: 2em;
+  color: #2f69d1;
   text-decoration: none;
+} 
+ 
+.ville-lien a:hover { 
+  text-decoration: underline; 
+} 
+ 
+.date-consultation { 
+  font-style: italic; 
+  color: #ffffff;
+  font-size: 1.1em;
+} 
+ 
+#acces_rapides{ 
+  background-color: rgba(7,6,6,0.8); 
+  padding: 2rem; 
+  border-radius: 10px; 
+  box-shadow: 0 0 10px rgba(9,7,7,0.9); 
+  max-width: 400px; 
+  width: 90%; 
+  text-align: center; 
+  color: white; 
+} 
+
+.label_ville {
+  font-weight: 500;
+  color: #ffffff;
 }
 
-.ville-lien a:hover {
-  text-decoration: underline;
+#last_consultation span {
+  display: block;
+  margin-bottom: 5px;
 }
 
-.date-consultation {
-  font-style: italic;
-  color: #777;
+
+#formulaire {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  margin: 2rem auto;
+  color: white;
+  font-family: Arial, sans-serif;
 }
 
+#formulaire h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.8em;
+  color: #ffffff;
+}
+
+#formulaire form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+#formulaire label {
+  margin-bottom: 0.3rem;
+  font-weight: bold;
+}
+
+#formulaire select {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  font-size: 1em;
+}
+
+#formulaire button[type="submit"] {
+  background-color: #2f69d1;
+  color: white;
+  border: none;
+  padding: 0.7rem 1rem;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#formulaire button[type="submit"]:hover {
+  background-color: #1e4fa8;
+}
+
+#formulaire select {
+  padding: 0.5rem;
+  border: 2px solid #2f69d1;
+  border-radius: 5px;
+  background-color: #ffffff;
+  color: #333333;
+  margin-bottom: 1rem;
+  font-size: 1em;
+  transition: border-color 0.3s ease;
+}
+
+
+#formulaire select:focus {
+  border-color: #1e4fa8;
+  outline: none;
+  box-shadow: 0 0 5px rgba(47, 105, 209, 0.5);
+}
+
+#formulaire option {
+  padding: 0.5rem;
+}
+
+.list-nav {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+.list-nav li a {
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background-color 0.3s, color 0.3s;
+  font-size: 1.3em;
+}

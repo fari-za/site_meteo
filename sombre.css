@@ -87,7 +87,6 @@ footer span {
   white-space: nowrap;
 }
 
-
 table {
   width: 100%;
   border-collapse: collapse;
@@ -108,7 +107,7 @@ th {
 }
 
 td {
-  background-color: #3d3333;
+  background-color: #494949;
   color: #ffffff;
 }
 
@@ -196,7 +195,6 @@ td {
   line-height: 1;
 }
 
-/* Effet au survol */
 .back-to-top:hover {
   background-color: #cacad7; 
   transform: scale(1.1);
@@ -226,7 +224,6 @@ button, input[type="submit"], input[type="button"] {
 button:hover, input[type="submit"]:hover, input[type="button"]:hover {
   background-color: #666;
 }
-
 
 .auto_location {
   display: inline-block;
@@ -258,38 +255,92 @@ button:hover, input[type="submit"]:hover, input[type="button"]:hover {
 .bar-container {
   width: 100%;
   max-width: 500px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  display: block;
+  padding-left: 10px;
 }
+
 .label {
-  font-weight: bold;
-  margin-bottom: 4px;
+  font-size: 0.8em;
+  white-space: nowrap;
+  font-weight: 500;
+  color: #ffffff;
+  display: block;
+  margin-bottom: 5px;
 }
+
 .bar {
   height: 24px;
   background-color: #4caf50;
   color: white;
-  text-align: right;
-  padding-right: 10px;
+  text-align: center;
   line-height: 24px;
-}
-
-#last_consultation {
-  display: inline-block;
-  margin: 15px 0;
-  font-size: 1rem;
-  line-height: 1.5;
+  border-radius: 5px;
+  min-width: 50px;
   display: block;
-}
-
-.label {
-  font-weight: 500;
-  color: #ffffff;
-
+  margin-top: 5px;
 }
 
 .ville-lien a {
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 2em;
+  color: #2f69d1;
+  text-decoration: none;
+}
+
+.ville-lien a:hover {
+  text-decoration: underline;
+}
+
+article {
+  display: block;
+  background: #1b1a1a;
+  padding: 20px;
+  margin: 30px auto;
+  max-width: 800px;
+  border-radius: 10px;
+  box-shadow: 2px 4px 10px rgba(255, 255, 255, 0.821);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;  
+}
+
+article:hover {
+  transform: scale(1.02);
+  
+}
+article table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+article td, article th {
+  padding: 12px;
+  border: 1px solid #d0c7c7;
+  text-align: left;
+}
+
+article td img {
+  max-width: 100px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+#last_consultation {
+  margin: 15px 0;
+  font-size: 0.9em;
+  line-height: 1.5;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+}
+
+.ville-lien a {
+  font-weight: bold;
+  font-size: 2em;
   color: #2a61c4;
   text-decoration: none;
 }
@@ -301,4 +352,128 @@ button:hover, input[type="submit"]:hover, input[type="button"]:hover {
 .date-consultation {
   font-style: italic;
   color: #ffffff;
+  font-size: 1.1em;
+}
+
+#acces_rapides{
+  background-color: rgba(7,6,6,0.8);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(9,7,7,0.9);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  color: white;
+}
+
+.label_ville {
+  font-weight: 500;
+  color: #ffffff;
+}
+
+#last_consultation span {
+  display: block;
+  margin-bottom: 5px;
+}
+
+
+/* Mode sombre */
+#formulaire {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  margin: 2rem auto;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+#formulaire h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.8em;
+  color: #ffffff;
+}
+
+#formulaire form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+#formulaire label {
+  margin-bottom: 0.3rem;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+#formulaire select {
+  padding: 0.5rem;
+  border: 2px solid #2f69d1;
+  border-radius: 5px;
+  background-color: #333333;
+  color: white;
+  margin-bottom: 1rem;
+  font-size: 1em;
+  transition: border-color 0.3s ease;
+}
+
+
+#formulaire select:focus {
+  border-color: #4b9ce2;
+  outline: none;
+  box-shadow: 0 0 5px rgba(75, 156, 226, 0.5);
+}
+
+#formulaire button[type="submit"] {
+  background-color: #2f69d1;
+  color: white;
+  border: none;
+  padding: 0.7rem 1rem;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#formulaire button[type="submit"]:hover {
+  background-color: #1e4fa8;
+}
+
+#formulaire option {
+  padding: 0.5rem;
+}
+
+
+#formulaire select {
+  padding: 0.5rem;
+  border: 2px solid #2f69d1;
+  border-radius: 5px;
+  background-color: #333333;
+  color: white;
+  margin-bottom: 1rem;
+  font-size: 1em;
+  transition: border-color 0.3s ease;
+}
+
+#formulaire select:focus {
+  border-color: #4b9ce2;
+  outline: none;
+  box-shadow: 0 0 5px rgba(75, 156, 226, 0.5);
+}
+
+#formulaire button[type="submit"] {
+  background-color: #2f69d1;
+  color: white;
+  border: none;
+  padding: 0.7rem 1rem;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#formulaire button[type="submit"]:hover {
+  background-color: #1e4fa8;
 }

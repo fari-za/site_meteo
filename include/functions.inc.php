@@ -28,49 +28,23 @@
 	}
 
 
-	//TD8 : 
-	
-	/**
-	 * Extrait les informations d'une URL (protocole, hôte, domaine, TLD).
-	 *
-	 * @param string $url L'URL à analyser.
-	 * @return array Un tableau associatif contenant les informations extraites.
-	 */
-	function extractUrlInfo(string $url): array {
-		$parsedUrl = parse_url($url);
-		if (!isset($parsedUrl['scheme'], $parsedUrl['host'])) {
-			return []; // Retourne un tableau vide 
-		}
-
-		$hostParts = explode('.', $parsedUrl['host']);
-		$tlds = ['com', 'org', 'net', 'fr'];
-
-		$tld = end($hostParts);
-		if (!in_array($tld, $tlds)) {
-			return []; 
-		}
-
-		return [
-			'protocol' => $parsedUrl['scheme'],
-			'host'     => $parsedUrl['host'],
-			'domain'   => $hostParts[count($hostParts) - 2] ?? '',
-			'tld'      => $tld,
-		];
-	}
-
-
-    //projet ////////////////////////////////////////////////////////////
-
     /**
      * Récupère les informations de localisation à partir de l'API ipinfo
      * @param string $ip L'adresse IP de l'utilisateur.
      * @return array|null Les données JSON de localisation ou null en cas d'erreur.
      */
-    function getIpInfo(string $ip) {
-        $url = "https://ipinfo.io/$ip/geo";
-        $response = file_get_contents($url);
-        return $response ? json_decode($response, true) : null;
+function getIpInfo(string $ip) {
+    $token = "9c0f944045c2f0";
+    $url = "https://ipinfo.io/$ip/geo?token=$token";
+    $response = file_get_contents($url);
+
+    if ($response == false) {
+        return null;
     }
+
+    return json_decode($response, true);
+}
+
 
     /**
      * Récupère les données de l'API NASA APOD
@@ -111,7 +85,12 @@
     }
 
 
-// Fonction pour charger les villes d'un département
+/**
+ * Charge les villes d’un département donné à partir du fichier CSV.
+ *
+ * @param string $departmentCode Le code du département.
+ * @return array Un tableau associatif des villes (code => nom).
+ */
 function loadCities(string $departmentCode): array {
     $filePath = './include/cities.csv';
     $cities = [];
@@ -127,11 +106,14 @@ function loadCities(string $departmentCode): array {
         }
         fclose($handle);
     }
-
     return $cities;
 }
 
-// Fonction pour charger les régions
+/**
+ * Charge les régions à partir du fichier CSV.
+ *
+ * @return array Un tableau associatif des régions (code => nom).
+ */
 function loadRegions(): array {
     $filePath = './include/regions.csv';
     $regions = [];
@@ -148,7 +130,12 @@ function loadRegions(): array {
     return $regions;
 }
 
-// Fonction pour charger les départements d'une région
+/**
+ * Charge les départements appartenant à une région donnée.
+ *
+ * @param string $regionCode Le code de la région.
+ * @return array Un tableau associatif des départements (code => nom).
+ */
 function loadDepartments(string $regionCode): array {
     $filePath = './include/departments.csv';
     $departments = [];
@@ -164,11 +151,16 @@ function loadDepartments(string $regionCode): array {
         }
         fclose($handle);
     }
-
     return $departments;
 }
 
-// Génère les options pour la sélection des régions
+
+/**
+ * Génère les options HTML pour le menu déroulant des régions.
+ *
+ * @param string $selectedRegion Le code de la région sélectionnée (facultatif).
+ * @return void
+ */
 function generateRegionOption($selectedRegion = '') {
 	$regions = loadRegions();
 	foreach ($regions as $code => $name) {
@@ -180,7 +172,13 @@ function generateRegionOption($selectedRegion = '') {
 }
 
 
-// Génère les options pour la sélection des départements
+/**
+ * Génère les options HTML pour le menu déroulant des départements.
+ *
+ * @param string $regionCode Le code de la région.
+ * @param string $selectedDepartment Le code du département sélectionné.
+ * @return void
+ */
 function generateDepartmentOption($regionCode, $selectedDepartment = '') {
     $departments = loadDepartments($regionCode);
     foreach ($departments as $code => $name) {
@@ -189,16 +187,28 @@ function generateDepartmentOption($regionCode, $selectedDepartment = '') {
     }
 }
 
-// Génère les options pour la sélection des villes
+/**
+* Génère les options HTML pour le menu déroulant des villes.
+*
+* @param string $departmentCode Le code du département.
+* @return void
+*/
 function generateCityOption($departmentCode) {
     $cities = loadCities($departmentCode);
+    asort($cities);
     foreach ($cities as $code => $name) {
         echo "<option value='".$name."'>".$name."</option>";
     }
 }
 
-
-function getMeteo(string $ville, int $days = 3) {
+/**
+ * Récupère les prévisions météo d'une ville en appelant l'API WeatherAPI.
+ *
+ * @param string $ville Le nom de la ville.
+ * @param int $days Le nombre de jours de prévision (par défaut 5).
+ * @return array|null Les données météo décodées ou null en cas d’erreur.
+ */
+function getMeteo(string $ville, int $days = 5) {
     $apiKey = "d2d407005de641c688f95501252803";
     $ville=removeAccents($ville);
     $url = "https://api.weatherapi.com/v1/forecast.json?key=" . $apiKey . "&q=" . urlencode($ville) . "&days=" . $days . "&lang=fr&units=metric";
@@ -211,6 +221,12 @@ function getMeteo(string $ville, int $days = 3) {
     }
 }
 
+/**
+ * Supprime les accents d’une chaîne de caractères.
+ *
+ * @param string $string La chaîne d’entrée.
+ * @return string La chaîne sans accents.
+ */
 function removeAccents($string) {
     return strtr(
         iconv('UTF-8', 'ASCII//TRANSLIT', $string),
@@ -221,8 +237,10 @@ function removeAccents($string) {
 ////////////// statistiques :
 
 /**
- * Récupère les données du fichier CSV
- * Le fichier CSV contien des lignes du format : city_name,consultation_count
+ * Récupère les données du fichier CSV de statistiques des villes.
+ *
+ * @param string $csvFile Le chemin vers le fichier CSV.
+ * @return array Tableau des lignes du fichier CSV.
  */
 function getCitiesData($csvFile) {
     $data = [];
@@ -242,7 +260,10 @@ function getCitiesData($csvFile) {
 }
 
 /**
- * Calcule le nombre total de consultations
+ * Calcule le nombre total de consultations toutes villes confondues.
+ *
+ * @param string $csvFile Le chemin vers le fichier CSV.
+ * @return int Le nombre total de consultations.
  */
 function getVisitCount($csvFile) {
     $data = getCitiesData($csvFile);
@@ -254,7 +275,11 @@ function getVisitCount($csvFile) {
 }
 
 /**
- * Ajoute ou met à jour une ville dans le fichier CSV.
+ * Ajoute une ville ou incrémente son compteur dans le fichier CSV
+ *
+ * @param string $csvFile Le chemin vers le fichier CSV.
+ * @param string $city Le nom de la ville
+ * @return void
  */
 function addCity($csvFile, $city) {
     $data = getCitiesData($csvFile);
@@ -285,9 +310,4 @@ function addCity($csvFile, $city) {
     }
 }
 
-
-
 ?>
-
-
-

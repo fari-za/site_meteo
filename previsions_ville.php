@@ -18,9 +18,16 @@ $previsions_heures = [];
 $previsions_jours = [];
 $message_erreur = "";
 
-    if (!empty($_GET["ville"])) {
-        $ville = htmlspecialchars($_GET["ville"]);
-        $data = getMeteo($ville, 5); // Récupération des prévisions pour 3 jours
+if (!empty($_GET["ville"])) {
+    $ville = htmlspecialchars($_GET["ville"]);
+}
+else {
+    $ville=$_COOKIE['last_city'];
+}
+
+    if (!empty($ville)) {
+
+        $data = getMeteo($ville, 5); // Récupération des prévisions pour 5 jours
 
         if ($data && isset($data["current"], $data["forecast"]["forecastday"][0]["hour"])) {
             // Météo actuelle
@@ -36,7 +43,7 @@ $message_erreur = "";
             // Prévisions par heure (seulement à partir de l'heure actuelle)
             foreach ($data["forecast"]["forecastday"][0]["hour"] as $heure) {
                 $hour = date("H", strtotime($heure["time"]));
-                if ($hour >= $current_time) { // Vérifie si l'heure est paire
+                if ($hour >= $current_time) {
                     $previsions_heures[] = [
                         "time" => $hour,
                         "temperature" => $heure["temp_c"],
@@ -45,7 +52,6 @@ $message_erreur = "";
                         "precip_mm" => $heure["precip_mm"],
                         "wind_kph" => $heure["wind_kph"],
                         "pressure_mb" => $heure["pressure_mb"]
-
                     ];
                 }
             }
@@ -73,6 +79,7 @@ $message_erreur = "";
 
     } else {
         $message_erreur = "Impossible de récupérer les données météo.";
+
     }
 
     $title="Météo - " .htmlspecialchars($ville ?? "Inconnue");
@@ -81,7 +88,7 @@ $message_erreur = "";
     // Chemin du fichier CSV pour les villes consultées
     $csvFile = 'villes_consultees.csv';
 
-    // Gestion du compteur global de visiteurs (optionnel)
+    // Gestion du compteur global de visiteurs
     $visiteur_file = 'visiteurs.csv';
     if (!file_exists($visiteur_file)) {
         file_put_contents($visiteur_file, "0");
@@ -90,8 +97,7 @@ $message_erreur = "";
     $visiteurs++;
     file_put_contents($visiteur_file, $visiteurs);
 
-    // Récupération de la ville passée en paramètre (GET ou POST)
-    $ville = isset($_GET['ville']) ? $_GET['ville'] : '';
+    // Récupération de la ville passée en paramètre
     if ($ville !== '') {
         addCity($csvFile, $ville);
     }
@@ -99,16 +105,15 @@ $message_erreur = "";
 require "./include/header.inc.php";
 ?>
 
-
 <?php if (!empty($meteo_actuelle)): ?>
 <section>
-    <h2>Météo à <?= htmlspecialchars($_GET["ville"]) ?></h2>
+    <h2>Météo à <?= $ville ?></h2>
     <article>
         <h3>Météo du jour</h3>
-    <table style="border-collapse: collapse; border: 1px solid black;">
+    <table>
         <tr>
             <td rowspan="4">
-                <img src="<?= $meteo_actuelle["icon"] ?>" alt="Icône météo">
+                <img src="<?= $meteo_actuelle["icon"] ?>" alt="Icône météo" />
             </td>
             <td><strong>Température actuelle :</strong> <?= $meteo_actuelle["temperature"] ?>°C</td>
         </tr>
@@ -118,9 +123,10 @@ require "./include/header.inc.php";
         <tr><td colspan="2"><strong>Vent :</strong> <?= $data["current"]["wind_kph"] ?> km/h</td></tr>
     </table>
     </article>
+
     <article>
-    <h3>Prévisions sur 5 jours</h3>
-    <table style="border: 1px solid black; cellpadding: 10;">
+        <h3>Prévisions des prochains jours </h3>
+        <table>
         <tr>
             <?php foreach ($previsions_jours as $jour): ?>
                 <th><?= $jour["date"] ?></th>
@@ -128,7 +134,7 @@ require "./include/header.inc.php";
         </tr>
         <tr>
             <?php foreach ($previsions_jours as $jour): ?>
-                <td><img src="<?= $jour["icon"] ?>" alt="Icône météo"></td>
+                <td><img src="<?= $jour["icon"] ?>" alt="Icône météo" /></td>
             <?php endforeach; ?>
         </tr>
         <tr>
@@ -140,29 +146,39 @@ require "./include/header.inc.php";
     </article>
 <?php endif; ?>
 
-<?php if (!empty($previsions_heures)): ?>
-    <h3>Évolution des conditions météo</h3>
-    <table border="1" cellpadding="10">
-        <tr>
-            <th>Heure</th>
-            <th>Ciel</th>
-            <th>Température</th>
-            <th>Pression</th>
-            <th>Pluie</th>
-            <th>Vent</th>
-        </tr>
-        <?php foreach ($previsions_heures as $heure): ?>
+    <?php if (!empty($previsions_heures)): ?>
+
+    <article>
+        <h3>Évolution des conditions météo</h3>
+
+        <button id="toggleButton" onclick="toggleHeureTable()" style="margin-bottom: 10px;">
+            Afficher les prévisions par heure
+        </button>
+
+        <table id="heureTable" style="display: none;">
+
             <tr>
-                <td><?= $heure["time"] ?></td>
-                <td><img src="<?= $heure["icon"] ?>" alt="Icône météo"></td>
-                <td><?= $heure["temperature"] ?>°C</td>
-                <td><?= $heure["pressure_mb"] ?> hPa</td>
-                <td><?= $heure["precip_mm"] ?> mm</td>
-                <td><?= $heure["wind_kph"] ?> km/h</td>
+                <th>Heure</th>
+                <th>Ciel</th>
+                <th>Température</th>
+                <th>Pression</th>
+                <th>Pluie</th>
+                <th>Vent</th>
             </tr>
-        <?php endforeach; ?>
-    </table>
+            <?php foreach ($previsions_heures as $heure): ?>
+                <tr>
+                    <td><?= $heure["time"] ?>:00</td>
+                    <td><img src="<?= $heure["icon"] ?>" alt="Icône météo" /></td>
+                    <td><?= $heure["temperature"] ?>°C</td>
+                    <td><?= $heure["pressure_mb"] ?> hPa</td>
+                    <td><?= $heure["precip_mm"] ?> mm</td>
+                    <td><?= $heure["wind_kph"] ?> km/h</td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </article>
 </section>
+
 <?php endif; ?>
 
 

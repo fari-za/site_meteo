@@ -7,14 +7,13 @@
 
     $apiKey = "i759zN3mV4bsAYHGJpgiJgiskyiYNdRgRwxudICk";
     $date = date("Y-m-d");
-    //$date = "2025-03-02";
     $data = getNasaData($apiKey, $date);
 
     if ($data) {
-        $mediaType = $data["media_type"] ?? "unknown";
+        $mediaType = $data["media_type"] ?? "inconnu";
         $src = $data["url"] ?? null;
         $srcHd = $data["hdurl"] ?? null;
-        $explanation = $data["explanation"] ?? "Pas d'explication disponible.";
+        $explanation = $data["explanation"] ?? "Pas d'explication disponible";
         $title = $data["title"] ?? "Titre inconnu.";
         $thumbnailUrl = $data["thumbnail_url"] ?? null;
     } else {
@@ -52,14 +51,14 @@
 
         <?php if ($mediaType === "image"): ?>
             <p lang="en">Pour voir l'image en HD : <a href="<?= htmlspecialchars($srcHd) ?>">cliquez ici</a>.</p>
-            <img src="<?= htmlspecialchars($src) ?>" alt="NASA APOD" class="nasa-image">
+            <img src="<?= htmlspecialchars($src) ?>" alt="NASA APOD" class="nasa-image" />
 
         <?php elseif ($mediaType === "video"): ?>
             <?php if (str_contains($src, 'youtube.com') || str_contains($src, 'vimeo.com')): ?>
                 <iframe src="<?= htmlspecialchars($src) ?>" frameborder="0" allowfullscreen style="width: 100%; height: 500px; display: block; margin: auto;"></iframe>
             <?php elseif (!empty($thumbnailUrl)): ?>
                 <p>Cette vidéo ne peut pas être intégrée ici. Voici un aperçu :</p>
-                <img src="<?= htmlspecialchars($thumbnailUrl) ?>" alt="Aperçu vidéo" class="nasa-image">
+                <img src="<?= htmlspecialchars($thumbnailUrl) ?>" alt="Aperçu vidéo" class="nasa-image" />
                 <p><a href="<?= htmlspecialchars($src) ?>" target="_blank">Voir la vidéo complète dans un nouvel onglet</a></p>
             <?php else: ?>
                 <p>Vidéo non intégrable. <a href="<?= htmlspecialchars($src) ?>" target="_blank">Clique ici pour la voir</a>.</p>
@@ -68,7 +67,7 @@
         <?php else: ?>
             <p>Aucune image ou vidéo disponible pour aujourd'hui.</p>
             <figure>
-                <img src="images/image_par_default_nasa.jpeg" alt="NASA APOD image par default">
+                <img src="images/image_par_default_nasa.jpeg" alt="NASA APOD image par default" />
             </figure>
         <?php endif; ?>
     <?php endif; ?>

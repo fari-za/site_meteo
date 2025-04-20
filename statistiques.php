@@ -28,23 +28,23 @@
     $maxCount = max($villesTop);
     ?>
 
-<section>
-    <p>Total de consultations : <?php echo $totalConsultations; ?></p>
+    <section>
+        <p>Total de consultations : <?php echo $totalConsultations; ?></p>
 
-    <h2>Top 5 des villes les plus consultées</h2>
+        <h2>Top 5 des villes les plus consultées</h2>
 
-    <?php foreach ($villesTop as $ville => $nb):
-        // Calculer la largeur
-        $pourcentage = ($nb / $maxCount) * 100;
-        ?>
-        <div class="bar-container">
-            <div class="label"><?php echo htmlspecialchars($ville); ?> (<?php echo $nb; ?>)</div>
-            <div class="bar" style="width: <?php echo $pourcentage; ?>%;">
+        <?php foreach ($villesTop as $ville => $nb):
+            // Calculer la largeur
+            $pourcentage = ($nb / $maxCount) * 100;
+            ?>
+            <span class="bar-container">
+            <span class="label"><?php echo htmlspecialchars($ville); ?> (<?php echo $nb; ?>)</span>
+            <span class="bar" style="width: <?php echo $pourcentage; ?>%;">
                 <?php echo $nb; ?>
-            </div>
-        </div>
-    <?php endforeach; ?>
-</section>
+            </span>
+        </span>
+        <?php endforeach; ?>
+    </section>
 
 
 <?php
